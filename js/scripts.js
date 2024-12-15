@@ -39,4 +39,4 @@ for (let i = 1; i < pokemonList.length; i++) {
 
 //for loop goes through heights and selects the tallest
 
-document.write("Wow, that's big! The biggest Pokémon is " + bigPokemon + " with a height of " + newBig + " meters.");
+document.write("The biggest Pokémon is " + bigPokemon + " with a height of " + newBig + " meters. Wow, that's big!");
