@@ -12,31 +12,20 @@ pokemonList = [
 //pokemonlist array
 
 for (let i = 0; i < pokemonList.length; i++) {
-    document.write(
-        `Name: ${pokemonList[i].name}, Height: ${pokemonList[i].height}, Type: ${pokemonList[i].type.join(', ')}<br>`
-    );
-}
 
-//displays list to index page .join method used to add array into a single string.
-//$ symbol is used for templeate literals to embed expressions into strings.
-//template literals are enclosed by backticks(`), and ${} is used to insert backticks
-//variables or expressions within the string.
+let height = pokemonList[i].height;
+let name = pokemonList[i].name;
+let type = pokemonList[i].type;
 
-
-document.write("<br>");
-//adds a break between the information given.
-
-
-let newBig = pokemonList[0].height;  // height of the first Pokémon
-let bigPokemon = pokemonList[0].name;  // name of the first Pokémon
-
-for (let i = 1; i < pokemonList.length; i++) {
-    if (pokemonList[i].height > newBig) {
-        newBig = pokemonList[i].height; // Update the new biggest height
-        bigPokemon = pokemonList[i].name; // Update the name of the biggest Pokémon
+    if (height > 1.6) {
+        document.write(
+            `Name: ${name}, Height: ${height}. Wow! That's a big Pokémon. Type: ${type}<br>`
+        );
+    } else {
+        document.write(
+            `Name: ${name}, Height: ${height}, Type: ${type}<br>`
+        );
     }
 }
-
-//for loop goes through heights and selects the tallest
-
-document.write("The biggest Pokémon is " + bigPokemon + " with a height of " + newBig + " meters. Wow, that's big!");
+// loops through list and checks if pokemon is bigger that 1.6 meters and add
+// wow thats a big Pokemon next to height.
