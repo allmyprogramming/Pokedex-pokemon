@@ -44,3 +44,12 @@ pokemonRepository.getAll().forEach(function(pokemon){
 }
 })
 /*\u00A0 is a Unicode escape sequence that represents a non-breaking space*/
+
+pokemonRepository.add({ name: "Ivysaur", height: 1.0, type: ['Grass', 'Poison'], HP: 60, Attack: 62 });
+
+document.write("<br>Updated Pokémon List:<br>");
+pokemonRepository.getAll().forEach(function (pokemon) {
+  document.write(
+    `Name: ${pokemon.name}, Height: ${pokemon.height}, Type: ${pokemon.type}<br>`
+  );
+});
