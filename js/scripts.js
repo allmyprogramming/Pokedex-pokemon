@@ -49,7 +49,17 @@ pokemonRepository.add({ name: "Ivysaur", height: 1.0, type: ['Grass', 'Poison'],
 
 document.write("<br>Updated Pokémon List:<br>");
 pokemonRepository.getAll().forEach(function (pokemon) {
-  document.write(
-    `Name: ${pokemon.name}, Height: ${pokemon.height}, Type: ${pokemon.type}<br>`
-  );
+  let height = pokemon.height;
+  let name = pokemon.name;
+  let type = pokemon.type;  
+
+  if (height > 1.6) {
+    document.write(
+        `Name: ${name}, Height: ${height}.\u00A0\u00A0Wow! That's a big Pokémon. Type: ${type}<br>`
+    );
+} else {
+    document.write(
+        `Name: ${name}, Height: ${height}, Type: ${type}<br>`
+    );
+}
 });
