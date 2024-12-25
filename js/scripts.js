@@ -30,8 +30,9 @@ let pokemonRepository = (function () {
       } // Display error if properties are missing
     }else {
         document.write("Invalid input. Only objects are allowed.<br>");
-      } // Show an error message if input is not an object
+      } 
     }
+  // Show an error message if input is not an object
   
     function getAll() {
       return pokemonList;
@@ -67,4 +68,21 @@ pokemonRepository.getAll().forEach(function(pokemon){
 /*\u00A0 is a Unicode escape sequence that represents a non-breaking space*/
 
 pokemonRepository.add({ name: "Ivysaur", height: 1.0, type: ['Grass', 'Poison'], hp: 60, attack: 62 });
+//added ivysaur to list of pokemon
 
+
+let pokemonNames = pokemonRepository.getAll().map(function (pokemon) {
+  return pokemon.name;  
+});
+//array of names
+
+
+let filteredNames = pokemonNames.filter(function (name) {
+  return name === "Pikachu";  
+});
+// filters of pikachu
+
+
+
+console.log(filteredNames); 
+//outputs result to console
