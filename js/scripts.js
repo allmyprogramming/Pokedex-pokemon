@@ -11,8 +11,30 @@ pokemonList = [
 ];
 //pokemonlist array
 
-for (let i = 0; i < pokemonList.length; i++) {
+/*function(pokemon) allows each element of pokemonList to the forEach function*/
 
+
+pokemonList.forEach(function(pokemon){
+
+
+  let height = pokemon.height;
+  let name = pokemon.name;
+  let type = pokemon.type;
+  
+
+  if (height > 1.6) {
+    document.write(
+        `Name: ${name}, Height: ${height}. 
+        Wow! That's a big Pokémon. Type: ${type}<br>`
+    );
+} else {
+    document.write(
+        `Name: ${name}, Height: ${height}, Type: ${type}<br>`
+    );
+}
+})
+
+/*
 let height = pokemonList[i].height;
 let name = pokemonList[i].name;
 let type = pokemonList[i].type;
@@ -27,5 +49,28 @@ let type = pokemonList[i].type;
         );
     }
 }
+
+*/
+
+
 // loops through list and checks if pokemon is bigger that 1.6 meters and add
 // wow thats a big Pokemon next to height.
+
+/*
+let pokemonRepository = (function () {
+    let pokemonList = [];
+  
+    function add(pokemon) {
+      pokemonList.push(pokemon);
+    }
+  
+    function getAll() {
+      return pokemonList;
+    }
+  
+    return {
+      add: add,
+      getAll: getAll
+    };
+  })();
+  */
