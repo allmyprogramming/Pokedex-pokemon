@@ -36,6 +36,23 @@ h1 {
     padding-left: 20px;
 }
 
+.button-class {
+    border: 10px solid rgb(3, 29, 83);
+    background-color: white;
+    color: black;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    
+    }
+
+
+.button--red { background-color: tomato; }
+.button--white { background-color: blue; }
+
 @media (max-width: 600px) {
     body {
         padding: 10px;
