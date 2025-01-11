@@ -3,31 +3,31 @@ html, body {
   height: 100vh; /* Full viewport height */
   font-family: Arial, sans-serif;
   text-align: center;
-  margin: 20px;
-  padding: 20px;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-/* Center the title "Pokédex" */
+/* Title Styling */
 h1 {
-  text-align: center;
   color: #192839;
-  font-size: 60px;
-  padding: 20px;
-  display: inline-block;
+  font-size: 4rem;
+  margin-top: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
 }
 
 /* Pokémon List */
 .pokemon-list {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columns for large screens */
-  gap: 20px;
-  padding: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+  gap: 1.5rem;
+  padding: 2rem; /* Add padding around the grid */
   margin: 0 auto;
-  max-width: 1200px; /* Control the width of the list */
+  max-width: 1200px;
+  list-style: none; /* Remove default list styles */
 }
 
-/* Individual Pokémon Item (Card) */
+/* Pokémon Item (Card) */
 .pokemon-list li {
   display: flex;
   justify-content: center;
@@ -35,131 +35,74 @@ h1 {
   text-align: center;
 }
 
-/* Uniform Button Style */
+/* Button Style */
 .button-class {
-  padding: 20px 40px;
-  font-size: 32px;
+  padding: 1rem; /*consistent sizing */
+  font-size: 1.25rem; /* Slightly larger font size */
   border: none;
-  border-radius: 8px;
+  border-radius: 0.5rem; /* Bootstrap's rounded style */
   cursor: pointer;
-  width: 100%;
+  width: 100%; /* Full-width button */
   transition: background-color 0.3s ease;
-  background-color: #192839; /* Blue background */
-  color: rgb(249, 246, 234); /* Gold text */
+  background-color: #192839; /* Custom blue background */
+  color: rgb(249, 246, 234); /* Custom gold text */
   text-transform: capitalize;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 .button-class:hover {
-  background-color: #ffcc00; /* Darker blue on hover */
+  background-color: #ffcc00; /* Gold hover color */
+  color: #192839; /* Blue text on hover */
+}
+/* Make Pokémon images larger */
+#pokemonModalImage {
+  width: 250px;  /* Increase the width */
+  height: 250px; /* Increase the height */
+  object-fit: contain;
+}
+/* Capitalize Pokémon names */
+.pokemon-list button {
+  text-transform: capitalize;
+}
+/* Default navbar link (inactive) */
+.navbar-nav .nav-link {
+  color: #ffffff !important; /* White text for inactive links */
+  font-weight: bold; /* Make text bold for better visibility */
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
 }
 
-/* Modal Styles */
-#modal-container {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
+/* Hover effect for navbar link (inactive) */
+.navbar-nav .nav-link:hover {
+  background-color: #0056b3; /* Dark blue background when hovered */
+  border-radius: 5px; /* Rounded corners on hover */
 }
 
-#modal-container.is-visible {
-  display: flex;
+/* Active navbar link (active state) */
+.navbar-nav .nav-link.active {
+  color: #ffffff !important; /* White text for active link */
+  background-color: #003366; /* Darker blue background for active link */
+  font-weight: bold; /* Bold text for active state */
+  border-radius: 5px; /* Rounded corners for active button */
 }
 
-.modal {
-  justify-content: center;
-  background-color: white;
-  padding: 30px 30px 20px; /* Reduced bottom padding */
+/* Active navbar link on hover */
+.navbar-nav .nav-link.active:hover {
+  background-color: #002244; /* Even darker blue on hover for active link */
+  color: #ffffff !important; /* Keep white text on hover */
+}
+/* amended modal content for more contrast*/
+.modal-content {
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  text-align: center;
-  width: 400px;
-  position: relative;
-}
-
-/* Modal Header */
-.modal h1 {
-  font-size: 36px;
-  color: #0099ff;
-  border: solid 1px;
-  margin-top: 0; /* Remove extra margin on top */
-  margin-bottom: 10px; /* Reduce space between header and content */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   text-transform: capitalize;
 }
 
-/* Modal Text Content */
-.modal p {
-  font-size: 20px;
-  margin-bottom: 5px;
+.modal-header {
+  background-color: #ffcc00;
+  color: #192839;
+  border-bottom: 2px solid #192839;
 }
 
-/* Modal Image */
-.modal img {
-  width: 250px;
-  height: 250px;
-  margin-bottom: 20px;
-  object-fit: contain;
-}
-
-/* Close Button Styling */
-.modal-close {
-  position: absolute;
-  top: 10px; /* Reduced the distance from the top */
-  right: 10px; /* Adjust the distance from the right */
-  padding: 10px 15px;
-  font-size: 18px;
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 2px;
-  cursor: pointer;
-  gap: 10px;
-}
-
-.modal-close:hover {
-  background-color: #a71d2a;
-  color: #0099ff;
-}
-
-/* Media Queries for Responsiveness */
-
-/* For Tablets */
-@media (max-width: 1024px) {
-  .pokemon-list {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns */
-  }
-
-  .button-class {
-    font-size: 18px; /* Smaller font size for buttons */
-  }
-}
-
-/* For Mobile Devices */
-@media (max-width: 600px) {
-  h1 {
-    font-size: 28px; /* Smaller title font size */
-  }
-
-  .pokemon-list {
-    grid-template-columns: 1fr; /* 1 column */
-  }
-
-  .button-class {
-    font-size: 16px; /* Even smaller button font size */
-    padding: 15px 30px; /* Adjust button size for mobile */
-  }
-
-  .modal {
-    width: 90%; /* Modal takes 90% of screen width on mobile */
-  }
-
-  .modal img {
-    width: 200px; /* Smaller image size on mobile */
-    height: 200px;
-  }
+.modal-body {
+  text-align: center;
 }

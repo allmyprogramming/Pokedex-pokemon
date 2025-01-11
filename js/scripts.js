@@ -1,5 +1,4 @@
 let pokemonRepository = (function () {
-  let modalContainer = document.querySelector('#modal-container');
   let pokemonList = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
@@ -9,10 +8,10 @@ let pokemonRepository = (function () {
       if (pokemon.name && pokemon.detailsUrl) {
         pokemonList.push(pokemon);
       } else {
-        console.log("Invalid Pokémon object. Ensure it contains 'name' and 'detailsUrl'.");
+        console.error("Invalid Pokémon object. Ensure it contains 'name' and 'detailsUrl'.");
       }
     } else {
-      console.log("Invalid input. Only objects are allowed.");
+      console.error("Invalid input. Only objects are allowed.");
     }
   }
 
@@ -25,19 +24,20 @@ let pokemonRepository = (function () {
   function addListItem(pokemon) {
     let pokemonListElement = document.querySelector(".pokemon-list");
     let listItem = document.createElement("li");
+    listItem.classList.add('list-group-item', 'text-center'); 
+
     let button = document.createElement("button");
-  
     button.innerText = pokemon.name;
-    button.classList.add("button-class");  
-  
+    button.classList.add("btn", "btn-primary", "w-100"); 
+
     // Event listener for showing details when a Pokémon name is clicked
     button.addEventListener("click", function () {
       showDetails(pokemon);
     });
-  
+
     listItem.appendChild(button);
     pokemonListElement.appendChild(listItem);
-  }  
+  }
 
   // Load Pokémon list from the API
   function loadList() {
@@ -52,9 +52,7 @@ let pokemonRepository = (function () {
           add(pokemon);
         });
       })
-      .catch(e => {
-        console.error(e);
-      });
+      .catch(e => console.error("Error loading Pokémon list:", e));
   }
 
   // Load Pokémon details (name, image, height, types)
@@ -63,77 +61,64 @@ let pokemonRepository = (function () {
     return fetch(url)
       .then(response => response.json())
       .then(details => {
-        // Adding details to the Pokémon object
         pokemon.imageUrl = details.sprites.front_default;
         pokemon.height = details.height;
         pokemon.types = details.types.map(typeInfo => typeInfo.type.name);
       })
-      .catch(e => {
-        console.error(e);
-      });
+      .catch(e => console.error("Error loading Pokémon details:", e));
   }
 
+  // Show details in the Bootstrap modal
   function showDetails(pokemon) {
-    loadDetails(pokemon).then(function () {
+    // Show the spinner while being loaded
+    let modalBody = document.querySelector('.modal-body');
+    let loadingSpinner = document.querySelector('#loadingSpinner');
+    let modalText = document.querySelector('#pokemonModalText');
+    let modalImage = document.querySelector('#pokemonModalImage');
 
-      // Now show the image in the modal
-      showModal(
-        `Details for ${pokemon.name}`,
-        `Height: ${pokemon.height} m<br>Types: ${pokemon.types.join(", ")}`,
-        pokemon.imageUrl // pass the image URL to the modal
-      );
+    loadingSpinner.classList.remove('d-none'); // Show the spinner
+    modalText.classList.add('d-none'); // Hide the text
+    modalImage.classList.add('d-none'); // Hide the image
+
+    loadDetails(pokemon).then(function () {
+      // Hide the spinner once the details are loaded
+      loadingSpinner.classList.add('d-none');
+
+      // Show the text and image
+      modalText.classList.remove('d-none');
+      modalImage.classList.remove('d-none');
+      modalText.innerHTML = `Height: ${pokemon.height} m<br>Types: ${pokemon.types.join(", ")}`;
+      modalImage.src = pokemon.imageUrl;
+      modalImage.alt = pokemon.name;
+
+      // Show the modal
+      let modalTitle = document.querySelector('#pokemonModalLabel');
+      modalTitle.innerText = `Details for ${pokemon.name}`;
+
+      let modal = new bootstrap.Modal(document.querySelector('#pokemonModal'));
+      modal.show();
+    }).catch(function (error) {
+      console.error("Error displaying Pokémon details:", error);
+      loadingSpinner.classList.add('d-none');
+      modalText.classList.remove('d-none');
+      modalText.innerHTML = "Error loading details. Please try again later.";
     });
   }
-  
+
+
   function showModal(title, text, imageUrl) {
-    // Clear all existing modal content
-    modalContainer.innerHTML = '';
-    
-    let modal = document.createElement('div');
-    modal.classList.add('modal');
-  
-    // Add the new modal content
-    let closeButtonElement = document.createElement('button');
-    closeButtonElement.classList.add('modal-close');
-    closeButtonElement.innerText = 'Close';
-    closeButtonElement.addEventListener('click', hideModal);
-  
-    let titleElement = document.createElement('h1');
-    titleElement.innerText = title;
-  
-    let contentElement = document.createElement('p');
-    contentElement.innerHTML = text; // Allow HTML content to include line breaks
-  
-    let imageElement = document.createElement('img');
-    imageElement.src = imageUrl; // Set the image URL for the Pokémon
-    imageElement.alt = title; // Set alt text for accessibility
-  
-    modal.appendChild(closeButtonElement);
-    modal.appendChild(titleElement);
-    modal.appendChild(contentElement);
-    modal.appendChild(imageElement); // Append the image to the modal
-    modalContainer.appendChild(modal);  
-    modalContainer.classList.add('is-visible');
-  }
-  
-  // Hide the modal
-  function hideModal() {
-    modalContainer.classList.remove('is-visible');
-  }
+    let modalTitle = document.querySelector('#pokemonModalLabel');
+    let modalText = document.querySelector('#pokemonModalText');
+    let modalImage = document.querySelector('#pokemonModalImage');
 
-  // Listen for the Escape key to close the modal
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
-      hideModal();
-    }
-  });
+    modalTitle.innerText = title;
+    modalText.innerHTML = text;
+    modalImage.src = imageUrl;
+    modalImage.alt = title;
 
-  // Close modal if clicked outside the modal content
-  modalContainer.addEventListener('click', (e) => {
-    if (e.target === modalContainer) {
-      hideModal();
-    }
-  });
+    let modal = new bootstrap.Modal(document.querySelector('#pokemonModal'));
+    modal.show();
+  }
 
   return {
     add: add,
