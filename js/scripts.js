@@ -28,14 +28,7 @@ let pokemonRepository = (function () {
     let button = document.createElement("button");
   
     button.innerText = pokemon.name;
-    button.classList.add("button-class");
-  
-    // Alternate button colors (Gold and Blue)
-    if (pokemonList.indexOf(pokemon) % 2 === 0) {
-      button.classList.add("button-blue"); // Blue for even-indexed Pokémon
-    } else {
-      button.classList.add("button-gold"); // Gold for odd-indexed Pokémon
-    }
+    button.classList.add("button-class");  
   
     // Event listener for showing details when a Pokémon name is clicked
     button.addEventListener("click", function () {
@@ -44,8 +37,7 @@ let pokemonRepository = (function () {
   
     listItem.appendChild(button);
     pokemonListElement.appendChild(listItem);
-  }
-  
+  }  
 
   // Load Pokémon list from the API
   function loadList() {
@@ -83,11 +75,7 @@ let pokemonRepository = (function () {
 
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function () {
-      console.log(`Name: ${pokemon.name}`);
-      console.log(`Height: ${pokemon.height}`);
-      console.log(`Types: ${pokemon.types.join(", ")}`);
-      console.log(`Image URL: ${pokemon.imageUrl}`);
-      
+
       // Now show the image in the modal
       showModal(
         `Details for ${pokemon.name}`,
@@ -124,8 +112,7 @@ let pokemonRepository = (function () {
     modal.appendChild(titleElement);
     modal.appendChild(contentElement);
     modal.appendChild(imageElement); // Append the image to the modal
-    modalContainer.appendChild(modal);
-  
+    modalContainer.appendChild(modal);  
     modalContainer.classList.add('is-visible');
   }
   
