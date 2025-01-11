@@ -24,11 +24,11 @@ let pokemonRepository = (function () {
   function addListItem(pokemon) {
     let pokemonListElement = document.querySelector(".pokemon-list");
     let listItem = document.createElement("li");
-    listItem.classList.add('list-group-item', 'text-center'); 
+    listItem.classList.add('list-group-item', 'text-center');
 
     let button = document.createElement("button");
     button.innerText = pokemon.name;
-    button.classList.add("btn", "btn-primary", "w-100"); 
+    button.classList.add("btn", "btn-primary", "w-100");
 
     // Event listener for showing details when a Pokémon name is clicked
     button.addEventListener("click", function () {
