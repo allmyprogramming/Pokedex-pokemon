@@ -56,8 +56,8 @@ h1 {
 }
 /* Make Pokémon images larger */
 #pokemonModalImage {
-  width: 250px;  /* Increase the width */
-  height: 250px; /* Increase the height */
+  width: 200px;  /* Increase the width */
+  height: 200px; /* Increase the height */
   object-fit: contain;
 }
 /* Capitalize Pokémon names */
